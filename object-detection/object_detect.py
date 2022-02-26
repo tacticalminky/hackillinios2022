@@ -4,7 +4,7 @@ import objects
 # https://github.com/Aravindlivewire/Opencv/tree/master/haarcascade - fist.xml
 # https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml - face.xml
 
-x = objects.Item("empty", 0, 0)
+x = objects.Item("empty", 0, 0, 0, 0)
 objects.trash.append(x)
 
 centerx = 0
@@ -33,25 +33,17 @@ while True:
     # puts boxes
     for (x, y, w, h) in paper: 
         img = cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 3)
-        objects.AddTrash("paper", x, y)
+        objects.AddTrash("paper", x, y, w, h)
 
     for (x, y, w, h) in plastic: 
         img = cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 3)
-        objects.AddTrash("plastic", x, y)
+        objects.AddTrash("plastic", x, y, w, h)
 
     for (x, y, w, h) in garbage:
         img = cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 3)
-        objects.AddTrash("garbage", x, y)
-    
-    items = objects.GetItems(3)
-    for item in items:
-        img = cv2.rectangle(img, (item.x, item.y), (item.x + 2, item.y + 2), (100, 150, 50), 3)
-
-    img = cv2.rectangle(img, (objects.trash[0].x, objects.trash[0].y), (objects.trash[0].x + 2, objects.trash[0].y + 2), (220, 220, 220), 3)
+        objects.AddTrash("garbage", x, y, w, h)
 
     objects.Sort()
-    bin = objects.GetBin()
-    print (objects.total, objects.total_plastic, objects.total_paper, objects.total_garbage)
 
     # displays image with boxes
     cv2.imshow('ObjectDetection', img)

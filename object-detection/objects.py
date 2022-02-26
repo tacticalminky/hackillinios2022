@@ -2,12 +2,16 @@ class Item:
     name = ""
     x = 0
     y = 0
+    w = 0
+    h = 0
     time = 0
     missing = 0
-    def __init__(item, name, x, y):
+    def __init__(item, name, x, y, w, h):
         item.name = name
         item.x = x
         item.y = y
+        item.w = w
+        item.h = h
         item.time = 0
         item.missing = 0
 
@@ -17,21 +21,19 @@ total_paper = 0
 total_plastic = 0
 total_garbage = 0
 
-def AddTrash(name, x, y):
+def AddTrash(name, x, y, w, h):
     for item in trash:
-        if item.name is name:
-            if (20 > abs(abs(x) - abs(item.x)) and 20 > abs(abs(y) - abs(item.y))):
-                item.x = x
-                item.y = y
-                item.time = item.time + 1
-                item.missing = 0
-            else:
-                trash.append(Item(name, x, y))
-                Add(name)
-
-        else:
-            trash.append(Item(name, x, y))
-            Add(name)
+        if ((item.name == name) and (50 > (abs(abs(x - (w / 2)) - abs(item.x - (item.w / 2))))) and (50 > (abs(abs(y - (h / 2)) - abs(item.y - (item.h / 2)))))):
+            item.x = x
+            item.y = y
+            item.w = w
+            item.h = h
+            item.time = item.time + 1
+            item.missing = 0
+            return
+    trash.append(Item(name, x, y, w, h))
+    Add(name)
+            
 
 def GetItems(time):
     toReturn = [Item]
@@ -42,9 +44,11 @@ def GetItems(time):
 
 def Sort():
     for item in trash:
-        if item.missing > 10 and len(trash) > 1:
+        if item.missing > 10:
             trash.remove(item)
         item.missing = item.missing + 1
+    if (len(trash) == 0 ):
+        AddTrash("empty", 0, 0, 0, 0)
 
 def GetBin():
     if trash[0].name == "paper":
