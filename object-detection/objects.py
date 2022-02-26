@@ -43,6 +43,11 @@ def GetItems(time):
             toReturn.append(item)
     return toReturn
 
+def GetTotals():
+    # global total_paper, total_garbage, total_plastic
+    result = [total_plastic, total_paper, total_garbage]
+    return result
+
 def Sort():
     for item in trash:
         if item.missing > 10:
@@ -68,4 +73,4 @@ def Add(name):
     if name == "garbage":
         total_garbage = total_garbage + 1
     total = total + 1
-    print(f"Totals: {total_paper} {total_plastic} {total_garbage}")
+    print(GetTotals())

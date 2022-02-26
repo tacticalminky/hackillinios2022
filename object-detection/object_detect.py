@@ -1,5 +1,7 @@
 import cv2
 import objects
+import pandas as pd
+import make_json
 # https://github.com/trane293/Palm-Fist-Gesture-Recognition - open_palm.xml
 # https://github.com/Aravindlivewire/Opencv/tree/master/haarcascade - fist.xml
 # https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml - face.xml
@@ -11,7 +13,6 @@ centerx = 0
 centery = 0
 
 imcap = cv2.VideoCapture(1)
-
 imcap.set(3, 640) # width = 640
 imcap.set(4, 480) # height = 480
 
@@ -50,9 +51,10 @@ while True:
 
     # displays image with boxes
     cv2.imshow('ObjectDetection', img)
+    make_json.makeJSONatFrame(objects.GetTotals(), objects.GetBin())
 
     # space key to close
-    if cv2.waitKey(1) & 0xFF == ord(' '):
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
 imcap.release()
