@@ -16,6 +16,7 @@
         "express": "latest",
         "fs": "latest",
         "path": "latest",
+        "socket.io": "latest",
         "telegraf": "latest"
     }
 }
