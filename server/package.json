@@ -11,7 +11,11 @@
         "url": "https://github.com/tacticalminky/hackillinois.git"
     },
     "dependencies": {
+        "dotenv": "latest",
+        "envfile": "latest",
         "express": "latest",
-        "path": "latest"
+        "fs": "latest",
+        "path": "latest",
+        "telegraf": "latest"
     }
 }
