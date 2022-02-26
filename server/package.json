@@ -1,0 +1,17 @@
+{
+    "name": "app",
+    "version": "0.0.1",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tacticalminky/hackillinois.git"
+    },
+    "dependencies": {
+        "express": "latest",
+        "path": "latest"
+    }
+}
