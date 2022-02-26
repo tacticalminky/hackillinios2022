@@ -52,9 +52,11 @@ while True:
     # displays image with boxes
     cv2.imshow('ObjectDetection', img)
     make_json.makeJSONatFrame(objects.GetTotals(), objects.GetBin())
+    make_json.final_dataframe_list.append(objects.GetTotals() + [objects.GetBin()])
 
     # space key to close
     if cv2.waitKey(1) & 0xFF == ord('q'):
+        make_json.makeFinalJSON(make_json.final_dataframe_list)
         break
 
 imcap.release()
