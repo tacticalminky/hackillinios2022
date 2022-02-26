@@ -1,11 +1,15 @@
 const express = require('express');
+const express = require('http');
 const path = require('path');
 const { Telegraf } = require('telegraf');
+const { Socket } = require('socket.io');
 const fs = require('fs');
 const envfile = require('envfile');
 require('dotenv').config();
 
 const app = new express();
+const server = http.createServer(app);
+const socket = new Socket(server);
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 bot.start((ctx) => {
@@ -25,13 +29,15 @@ app.get('/', (req, res) => {
 app.use(express.static(path.join(__dirname, 'www')));
 
 app.post('/', (req, res) => {
-    console.log('Post recieved');
     bot.telegram.sendMessage(process.env.CHAT_ID, 'Post recieved');
 
 });
 
+socket.on('connect', (socket) => {
+    console.log("Connected to socket");
+});
+
 const port = 8000;
-app.listen(port, function() {
+server.listen(port, function() {
     console.log(`Server started at http://localhost:${port}`);
 });
-require('http').createServer(bot.webhookCallback('/secret-path')).listen(3000);
