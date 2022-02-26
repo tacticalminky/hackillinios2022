@@ -4,13 +4,16 @@ stream = cv2.VideoCapture(0) # Change the 1 to a 0 on your system if it doesn't 
 
 while True:
     ret, frame = stream.read()
-    cv2.imshow('frame', frame)
+    rgb_frame = frame[:, :, ::-1]
+    
     """
     1. get list of bounding box coordinates using detectMultiScale
     2. Loop through list of coordinates and draw bounding box and label
     3. Send data to servos/LEDs which will then actuate
     """
 
+    cv2.imshow('frame', frame)
+    
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
