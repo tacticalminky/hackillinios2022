@@ -1,6 +1,6 @@
 import cv2
 
-stream = cv2.VideoCapture(1)
+stream = cv2.VideoCapture(1) # Change the 1 to a 0 on your system if it doesn't work
 
 while True:
     ret, frame = stream.read()
