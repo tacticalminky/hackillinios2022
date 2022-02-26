@@ -51,10 +51,7 @@ while True:
 
     objects.Sort()
     bin = objects.GetBin()
-    total_plastic = objects.GetTotal("plastic")
-    total_paper = objects.GetTotal("paper")
-    total_trash = objects.GetTotal("garbage")
-    print (total_plastic, total_paper, total_trash)
+    print (objects.total, objects.total_plastic, objects.total_paper, objects.total_garbage)
 
     # displays image with boxes
     cv2.imshow('ObjectDetection', img)

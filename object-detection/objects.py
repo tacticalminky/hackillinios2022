@@ -12,6 +12,7 @@ class Item:
         item.missing = 0
 
 trash = [Item]
+total = 0
 total_paper = 0
 total_plastic = 0
 total_garbage = 0
@@ -26,8 +27,11 @@ def AddTrash(name, x, y):
                 item.missing = 0
             else:
                 trash.append(Item(name, x, y))
+                Add(name)
+
         else:
             trash.append(Item(name, x, y))
+            Add(name)
 
 def GetItems(time):
     toReturn = [Item]
@@ -35,13 +39,6 @@ def GetItems(time):
         if item.time >= time:
             toReturn.append(item)
     return toReturn
-
-def GetTotal(name):
-    total = 0
-    for item in trash:
-        if item.name == name:
-            total = total + 1
-    return total
 
 def Sort():
     for item in trash:
@@ -57,3 +54,12 @@ def GetBin():
     else:
         return 2
 
+def Add(name):
+    global total_paper, total_garbage, total_plastic, total
+    if name == "paper":
+        total_paper = total_paper + 1
+    if name == "plastic":
+        total_plastic = total_plastic + 1
+    if name == "garbage":
+        total_garbage = total_garbage + 1
+    total = total + 1
