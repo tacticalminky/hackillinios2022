@@ -10,7 +10,7 @@ objects.trash.append(x)
 centerx = 0
 centery = 0
 
-imcap = cv2.VideoCapture(0)
+imcap = cv2.VideoCapture(1)
 
 imcap.set(3, 640) # width = 640
 imcap.set(4, 480) # height = 480
@@ -34,14 +34,17 @@ while True:
     for (x, y, w, h) in paper: 
         img = cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 3)
         objects.AddTrash("paper", x, y, w, h)
+        print("Paper detected")
 
     for (x, y, w, h) in plastic: 
         img = cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 3)
         objects.AddTrash("plastic", x, y, w, h)
+        print("Plastic detected")
 
     for (x, y, w, h) in garbage:
         img = cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 3)
         objects.AddTrash("garbage", x, y, w, h)
+        print("Garbage detected")
 
     objects.Sort()
 

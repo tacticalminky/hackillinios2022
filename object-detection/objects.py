@@ -32,6 +32,7 @@ def AddTrash(name, x, y, w, h):
             item.missing = 0
             return
     trash.append(Item(name, x, y, w, h))
+
     Add(name)
             
 
@@ -67,3 +68,4 @@ def Add(name):
     if name == "garbage":
         total_garbage = total_garbage + 1
     total = total + 1
+    print(f"Totals: {total_paper} {total_plastic} {total_garbage}")
