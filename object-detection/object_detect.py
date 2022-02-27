@@ -10,10 +10,14 @@ import serial
 x = objects.Item("empty", 0, 0, 0, 0)
 objects.trash.append(x)
 
+ser = serial.Serial('COM3', 9600)
+
 centerx = 0
 centery = 0
 
-imcap = cv2.VideoCapture(1)
+a = False
+
+imcap = cv2.VideoCapture(0)
 imcap.set(3, 640) # width = 640
 imcap.set(4, 480) # height = 480
 
@@ -58,9 +62,12 @@ while True:
     # f = open("datafile", "w")
     # f.write(str(objects.GetBin()))
     # f.close()
-    if frame_number % 10000 == 0:
+    print(frame_number)
+    if frame_number % 50 == 0:
+        if ser.isOpen() == False:
+            ser = serial.Serial('COM3', 9600)
+    if frame_number % 100 == 0:
         make_json.makeJSONatFrame(objects.GetTotals(), objects.GetBin())
-        ser = serial.Serial('COM3',9600)
         ser.write(objects.GetBin())
         ser.close()
     make_json.final_dataframe_list.append(objects.GetTotals() + [objects.GetBin()])

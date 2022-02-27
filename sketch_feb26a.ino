@@ -86,7 +86,7 @@ void serialEvent(){
       garbage_open = true;
     }
   }
-  delay(1000);
+  delay(500);
   paper.write(93);
   plastic.write(93);
   garbage.write(93);
