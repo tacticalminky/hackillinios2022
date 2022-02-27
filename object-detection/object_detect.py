@@ -2,6 +2,7 @@ import cv2
 import objects
 import pandas as pd
 import make_json
+import serial
 # https://github.com/trane293/Palm-Fist-Gesture-Recognition - open_palm.xml
 # https://github.com/Aravindlivewire/Opencv/tree/master/haarcascade - fist.xml
 # https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml - face.xml
@@ -55,6 +56,9 @@ while True:
     f = open("datafile", "w")
     f.write(str(objects.GetBin()))
     f.close()
+    ser = serial.Serial('COM3',9600)
+    ser.write(objects.GetBin())
+    ser.close()
     make_json.final_dataframe_list.append(objects.GetTotals() + [objects.GetBin()])
 
     # space key to close
