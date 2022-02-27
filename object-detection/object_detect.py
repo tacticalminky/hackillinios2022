@@ -13,7 +13,7 @@ objects.trash.append(x)
 centerx = 0
 centery = 0
 
-imcap = cv2.VideoCapture(0)
+imcap = cv2.VideoCapture(1)
 imcap.set(3, 640) # width = 640
 imcap.set(4, 480) # height = 480
 
@@ -21,7 +21,9 @@ fistCascade = cv2.CascadeClassifier("fist.xml")
 handCascade = cv2.CascadeClassifier("open_palm.xml")
 faceCascade = cv2.CascadeClassifier("face.xml")
 
+frame_number = 0
 while True:
+    frame_number += 1
     # captures image
     success, img = imcap.read() 
    
@@ -53,12 +55,13 @@ while True:
     # displays image with boxes
     cv2.imshow('ObjectDetection', img)
     make_json.makeJSONatFrame(objects.GetTotals(), objects.GetBin())
-    f = open("datafile", "w")
-    f.write(str(objects.GetBin()))
-    f.close()
-    ser = serial.Serial('COM3',9600)
-    ser.write(objects.GetBin())
-    ser.close()
+    # f = open("datafile", "w")
+    # f.write(str(objects.GetBin()))
+    # f.close()
+    if frame_number % 10 == 0:
+        ser = serial.Serial('COM3',9600)
+        ser.write(objects.GetBin())
+        ser.close()
     make_json.final_dataframe_list.append(objects.GetTotals() + [objects.GetBin()])
 
     # space key to close
