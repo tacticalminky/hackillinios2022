@@ -54,11 +54,12 @@ while True:
 
     # displays image with boxes
     cv2.imshow('ObjectDetection', img)
-    make_json.makeJSONatFrame(objects.GetTotals(), objects.GetBin())
+    
     # f = open("datafile", "w")
     # f.write(str(objects.GetBin()))
     # f.close()
-    if frame_number % 10 == 0:
+    if frame_number % 10000 == 0:
+        make_json.makeJSONatFrame(objects.GetTotals(), objects.GetBin())
         ser = serial.Serial('COM3',9600)
         ser.write(objects.GetBin())
         ser.close()
