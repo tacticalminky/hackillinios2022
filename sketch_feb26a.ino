@@ -13,7 +13,7 @@ void setup() {
   paper.attach(A1);
   plastic.attach(A2);
   garbage.attach(A3);
-  Serial.begin(9600);
+  Serial.begin(500000);
 
 }
 
@@ -92,3 +92,4 @@ void serialEvent(){
   garbage.write(93);
   Serial.flush();
 }
+

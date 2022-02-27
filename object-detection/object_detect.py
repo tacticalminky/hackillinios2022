@@ -10,7 +10,7 @@ import serial
 x = objects.Item("empty", 0, 0, 0, 0)
 objects.trash.append(x)
 
-ser = serial.Serial('COM3', 9600)
+ser = serial.Serial('COM3', 500000)
 
 centerx = 0
 centery = 0
@@ -65,7 +65,7 @@ while True:
     print(frame_number)
     if frame_number % 50 == 0:
         if ser.isOpen() == False:
-            ser = serial.Serial('COM3', 9600)
+            ser = serial.Serial('COM3', 500000)
     if frame_number % 100 == 0:
         make_json.makeJSONatFrame(objects.GetTotals(), objects.GetBin())
         ser.write(objects.GetBin())
